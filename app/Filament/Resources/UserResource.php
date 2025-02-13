@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Rawilk\FilamentPasswordInput\Password;
 
 class UserResource extends Resource
 {
@@ -25,10 +26,10 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('email')->required(),
-                Forms\Components\TextInput::make('score'),
-                Forms\Components\TextInput::make('latest_step'),
-                Forms\Components\TextInput::make('password')->required(),
-                Forms\Components\TextInput::make('password_confirmation')->required()->same('password'),
+                Password::make('password')->label('Password'),
+                Password::make('password_confirmation')->label('Konfirmasi Password')->required()->same('password'),
+                Forms\Components\TextInput::make('score')->default(0),
+                Forms\Components\TextInput::make('latest_step')->default(0),
             ]);
     }
 
