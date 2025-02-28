@@ -27,6 +27,7 @@ class User extends Authenticatable
         'score',
         'latest_step',
         'password',
+        'email_verified_at',
     ];
 
     /**
@@ -55,4 +56,13 @@ class User extends Authenticatable
     // {
     //     return str_ends_with($this->email, '@quodiro.com') && $this->hasVerifiedEmail();
     // }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->email_verified_at = now();
+        });
+    }
 }
